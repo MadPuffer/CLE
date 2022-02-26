@@ -2,14 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="15b0287d-5de4-41ba-83d6-9a665c8e3f80" name="Default Changelist" comment="new commands">
-      <change afterPath="$PROJECT_DIR$/.idea/cmd.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scripts.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts.js" beforeDir="false" afterPath="$PROJECT_DIR$/scripts.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -57,8 +50,16 @@
       <option name="presentableId" value="Default" />
       <updated>1645813852452</updated>
       <workItem from="1645813854291" duration="5652000" />
-      <workItem from="1645829490112" duration="8685000" />
+      <workItem from="1645829490112" duration="9113000" />
     </task>
+    <task id="LOCAL-00001" summary="new commands">
+      <created>1645838221044</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1645838221044</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -73,10 +74,10 @@
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="461" y="185" key="SettingsEditor/0.0.1920.1080@0.0.1920.1080" timestamp="1645836342986" />
-    <state x="552" y="273" key="Vcs.Push.Dialog.v2" timestamp="1645838174320">
+    <state x="552" y="273" key="Vcs.Push.Dialog.v2" timestamp="1645838249410">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state x="552" y="273" key="Vcs.Push.Dialog.v2/0.0.1920.1080@0.0.1920.1080" timestamp="1645838174320" />
+    <state x="552" y="273" key="Vcs.Push.Dialog.v2/0.0.1920.1080@0.0.1920.1080" timestamp="1645838249410" />
     <state x="761" y="446" key="git4idea.remote.GitConfigureRemotesDialog" timestamp="1645838152815">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
