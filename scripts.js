@@ -25,7 +25,7 @@ function enterCommand(inputArea) {
 
     let pastCommands = document.getElementById("editableBox");
 
-    let commandLine = document.createElement("span")
+    let commandLine = document.createElement("span");
     commandLine.className = "command-line";
     commandLine.innerText = "C:\\Users\\Billy>" + val + "\n";
     pastCommands.insertAdjacentElement("beforeend", commandLine);
@@ -41,17 +41,17 @@ function enterCommand(inputArea) {
     if (commands.hasOwnProperty(val)) {
         if (val === "help")
         {
-            help(commands)
-            return 0
+            help(commands);
+            return 0;
         }
-        commands.get(val)();
+        commands[val];
     }
 
 }
 
 function ver() {
     let pastCommands = document.getElementById("editableBox");
-    let commandLine = document.createElement("span")
+    let commandLine = document.createElement("span");
     commandLine.className = "command-line";
     commandLine.innerText = "C:\\Users\\Billy>" + "CommandLine Emulator [Version 0.0.6.9]" + "\n";
     pastCommands.insertAdjacentElement("beforeend", commandLine);
@@ -60,7 +60,7 @@ function ver() {
 function help(commands) {
     let pastCommands = document.getElementById("editableBox");
     for (const key in commands) {
-        let commandLine = document.createElement("span")
+        let commandLine = document.createElement("span");
         commandLine.className = "command-line";
         commandLine.innerText = key.toUpperCase() + "\n";
         pastCommands.insertAdjacentElement("beforeend", commandLine);
@@ -68,3 +68,18 @@ function help(commands) {
 
 }
 
+class Command {
+    constructor(name, desc, func) {
+        this.name = name;
+        this.desc = desc;
+        this.func = func;
+    }
+
+    getInfo() {
+        // Return info about this command
+    }
+
+    execute() {
+        func();
+    }
+}
