@@ -1,0 +1,39 @@
+html {
+    background: black;
+    color: rgb(0, 255, 0);
+    font-family: "Courier New", monospace;
+}
+
+.input-box {
+    outline: none;
+    border: none;
+    background: black;
+    color: rgb(0, 255, 0);
+    font-family: "Courier New", monospace;
+    width: 90%;
+    font-size: 16px;
+    caret-shape: block;
+    caret-color: transparent;
+    padding: 0;
+}
+.caret-block {
+    background: rgb(0, 255, 0);
+    animation: blink 1.5s step-end infinite;
+}
+
+.command-line {
+    display: block;
+    margin-bottom: 10px;
+    color: rgb(0, 255, 0);
+    font-size: 16px;
+}
+
+@keyframes blink {
+    from,
+    to {
+        background: transparent;
+    }
+    50% {
+        background: rgb(0, 255, 0);
+    }
+}
