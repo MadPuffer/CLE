@@ -15,6 +15,7 @@ html {
     caret-shape: block;
     caret-color: transparent;
     padding: 0;
+    white-space: pre;
 }
 .caret-block {
     background: rgb(0, 255, 0);
