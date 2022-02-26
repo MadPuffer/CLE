@@ -34,7 +34,8 @@ function enterCommand(inputArea) {
 
     let commands = {
         "ver" : ver,
-        "help" : help
+        "help" : help,
+        "cls" : cls
     };
 
 
@@ -44,7 +45,7 @@ function enterCommand(inputArea) {
             help(commands)
             return 0
         }
-        commands.get(val)();
+        commands[val]();
     }
 
 }
@@ -66,5 +67,12 @@ function help(commands) {
         pastCommands.insertAdjacentElement("beforeend", commandLine);
     }
 
+}
+
+function cls() {
+    let pastCommands = document.getElementById("editableBox");
+    while(pastCommands.firstChild){
+        pastCommands.removeChild(pastCommands.firstChild);
+    }
 }
 
