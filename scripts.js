@@ -82,7 +82,8 @@ function enterCommand(inputArea) {
         "cle": new Command("cle", "Starts a new instance of the Web command interpreter.", ver),
         "cd": new Command("cd", "Displays the name of or changes the current directory.", cd),
         "md": new Command("md", "Creates a directory.", md),
-        "color": new Command("color", "Change color.", color)
+        "color": new Command("color", "Change color.", color),
+        "title": new Command("title", "Change CLE title.", title)
     };
 
 
@@ -239,7 +240,7 @@ function color(val) {
     // Я думаю, тут код можно упростить, но мне лень.
     var root = document.querySelector(':root');
     if (val.split(' ').length === 1) {
-        document.body.style.backgroundColor = "black";
+        root.style.setProperty("--background-color", colors["0"]);
         root.style.setProperty("--text-color", "white");
     } else if (val.split(' ').length > 1) {
         let inputColors = val.split(' ')[1];
@@ -258,6 +259,12 @@ function color(val) {
                 root.style.setProperty("--background-color", colors[bgColor]);
             }
         }
+    }
+}
+
+function title(val) {
+    if (val.split(' ').length == 2) {
+        document.title = val.split(' ')[1];
     }
 }
 
