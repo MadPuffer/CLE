@@ -1,14 +1,23 @@
+:root {
+    --text-color: rgb(19, 161, 14);
+    --background-color: rgb(12, 12, 12);
+}
+
+body {
+    background-color: var(--background-color);
+}
+
 html {
-    background: black;
-    color: rgb(0, 255, 0);
+    /* background: var(--background-color); */
+    color: var(--text-color);
     font-family: "Courier New", monospace;
 }
 
 .input-box {
     outline: none;
     border: none;
-    background: black;
-    color: rgb(0, 255, 0);
+    background: var(--background-color);
+    color: var(--text-color);
     font-family: "Courier New", monospace;
     width: 90%;
     font-size: 16px;
@@ -18,15 +27,18 @@ html {
     white-space: pre;
 }
 .caret-block {
-    background: rgb(0, 255, 0);
+    background: var(--text-color);
     animation: blink 1.5s step-end infinite;
 }
 
 .command-line {
     display: block;
     margin-bottom: 10px;
-    color: rgb(0, 255, 0);
     font-size: 16px;
+}
+
+.editableBox {
+    color: var(--text-color);
 }
 
 @keyframes blink {
@@ -35,6 +47,6 @@ html {
         background: transparent;
     }
     50% {
-        background: rgb(0, 255, 0);
+        background: var(--text-color);
     }
 }
