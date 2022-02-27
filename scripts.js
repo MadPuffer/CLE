@@ -239,7 +239,7 @@ function color(val) {
     // Я думаю, тут код можно упростить, но мне лень.
     var root = document.querySelector(':root');
     if (val.split(' ').length === 1) {
-        document.body.style.backgroundColor = "black";
+        root.style.setProperty("--background-color", colors["0"]);
         root.style.setProperty("--text-color", "white");
     } else if (val.split(' ').length > 1) {
         let inputColors = val.split(' ')[1];
