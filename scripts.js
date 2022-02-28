@@ -155,7 +155,7 @@ function cd(val) {
     let commandLine = document.createElement("span")
     commandLine.className = "command-line";
 
-    let route = val.split(" ")[1]
+    let route = val.split(" ").slice(1).join(" ")
 
     if (val.split(" ").length === 1) {
         commandLine.innerText = currentDir.getFullRoute();
@@ -237,7 +237,7 @@ function md(val) {
         return 0
     }
 
-    let route = val.split(" ")[1]
+    let route = val.split(" ").slice(1).join(" ")
 
     if (route.split("\\")[0].toLowerCase() === "c:") {
         createDirByFullPath(route)
