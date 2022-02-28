@@ -1,29 +1,91 @@
-class FileSystemObject {
-    constructor(name, type, parent) {
+class Command {
+    constructor(name, desc, func) {
         this.name = name;
-        this.type = type;
-        this.parent = parent;
-        this.route = parent.getRoute + "\\" + this.name;
-
+        this.desc = desc;
+        this.func = func;
     }
 
-    getRoute() {
-        return this.route;
+    getInfo() {
+        return this.desc;
     }
 
+    execute(val) {
+        this.func(val);
+    }
 }
 
-let currentDir = "C:\\"
-let routes = [
-    "c:\\"
-]
-let files = [
-    new FileSystemObject("c:", "directory", new FileSystemObject("", "", ""))
-]
+class mkdir {
+    constructor(name, type, meta, children, parent)
+    {
+        this.name = name;
+        this.type = type;
+        this.meta = meta;
+        this.children = children;
+        this.parent = parent
+    }
+
+    getName() {
+        return this.name
+    }
+
+    getChildren() {
+        return this.children
+    }
+
+    getParent() {
+        return this.parent
+    }
+
+    addChild(child) {
+        this.children.push(child)
+    }
+
+    getFullRoute() {
+        if (this.name === "C:") {
+            return this.name
+        }
+
+        return this.parent.getFullRoute() + "\\" + this.name
+    }
+}
+
+class mkfile {
+
+    constructor(name, type, meta, parent)
+    {
+        this.name = name;
+        this.type = type;
+        this.meta = meta;
+        this.parent = parent
+    }
+
+    getName() {
+        return this.name
+    }
+}
+
+// global vars
+let root = new mkdir("C:", "directory", {}, [
+])
+root.addChild(new mkdir("users", "directory", {}, [], root))
+root.addChild(new mkdir("documents", "directory", {}, [], root))
+
+let currentDir = root
+
+let commands = {
+    "ver" : new Command("ver", "Displays the CLE version.", ver),
+    "help" : new Command("help", "Provides Help information for CLE.", help),
+    "cls" : new Command("cls", "Clears the screen.", cls),
+    "cle" : new Command("cle", "Starts a new instance of the Web command interpreter.", ver),
+    "cd" : new Command("cd", "Displays the name of or changes the current directory.", cd),
+    "md" : new Command("md", "Creates a directory.", md),
+    "color": new Command("color", "Change color.", color),
+    "title": new Command("title", "Change CLE title.", title)
+};
 
 $(document).ready(function () {
     let currDirSpan = document.getElementById("currentDir");
-    currDirSpan.innerText = currentDir + ">";
+    currDirSpan.innerText = currentDir.getFullRoute() + ">"
 
     let input = document.getElementById("input-box");
     input.focus();
@@ -70,49 +132,22 @@ function enterCommand(inputArea) {
 
     let commandLine = document.createElement("span")
     commandLine.className = "command-line";
-    commandLine.innerText = currentDir + ">" + val + "\n";
+    commandLine.innerText = currentDir.getFullRoute() + ">" + val + "\n";
     pastCommands.insertAdjacentElement("beforeend", commandLine);
 
     // handler
 
-    let commands = {
-        "ver": new Command("ver", "Displays the CLE version.", ver),
-        "help": new Command("help", "Provides Help information for CLE.", help),
-        "cls": new Command("cls", "Clears the screen.", cls),
-        "cle": new Command("cle", "Starts a new instance of the Web command interpreter.", ver),
-        "cd": new Command("cd", "Displays the name of or changes the current directory.", cd),
-        "md": new Command("md", "Creates a directory.", md),
-        "color": new Command("color", "Change color.", color),
-        "title": new Command("title", "Change CLE title.", title)
-    };
-
-
     if (commands.hasOwnProperty(val.toLowerCase().split(" ")[0])) {
-        if (val.toLowerCase() === "help") {
-            help(commands);
-            return 0;
+        if (val.toLowerCase() === "help")
+        {
+            help(commands)
+            return 0
         }
         commands[val.toLowerCase().split(" ")[0]].execute(val);
     } else {
-        invalidCommand(val.toLowerCase());
+        invalidCommand(val.toLowerCase())
     }
 
-}
-
-class Command {
-    constructor(name, desc, func) {
-        this.name = name;
-        this.desc = desc;
-        this.func = func;
-    }
-
-    getInfo() {
-        return this.desc;
-    }
-
-    execute(val) {
-        this.func(val);
-    }
 }
 
 function cd(val) {
@@ -123,20 +158,73 @@ function cd(val) {
     let route = val.split(" ")[1]
 
     if (val.split(" ").length === 1) {
-        commandLine.innerText = currentDir;
+        commandLine.innerText = currentDir.getFullRoute();
         pastCommands.insertAdjacentElement("beforeend", commandLine);
-    } else if (route.split("\\")[0].toLowerCase() === "c:") {
+    } else if (route === "..") {
+        currentDir = currentDir.getParent()
 
-        if (routes.find(r => r === route) === route) {
-            currentDir = val.replace("c:", "C:").split(" ")[1]
+    }   else if (route.split("\\")[0].toLowerCase() === "c:") {
+
+        if (findDirByFullPath(route) === -1) {
+            commandLine.innerText = "The system cannot find the path specified.";
+            pastCommands.insertAdjacentElement("beforeend", commandLine);
         }
-
+    } else {
+        if (findDirByRelativePath(route) === -1) {
+            commandLine.innerText = "The system cannot find the path specified.";
+            pastCommands.insertAdjacentElement("beforeend", commandLine);
+        }
     }
 
-    document.getElementById("currentDir").innerText = currentDir + ">"
+    document.getElementById("currentDir").innerText = currentDir.getFullRoute() + ">"
+    
+}
 
-    // commandLine.innerText = "'" + val + "'" + " is not recognized as an internal command";
-    // pastCommands.insertAdjacentElement("beforeend", commandLine);
+function findDirByRelativePath(route) {
+    let splittedRoute = route.split("\\")
+    let step = 0;
+    let dirToFind
+    let currDir = currentDir
+
+    while(step !== splittedRoute.length) {
+        dirToFind = splittedRoute[step]
+        currDir = currDir.getChildren().find(x => x.getName() === dirToFind)
+
+        if (currDir === undefined) {
+            return -1
+        }
+
+        step += 1
+    }
+
+    currentDir = currDir
+    return 0
+}
+
+function findDirByFullPath(route) {
+    let splittedRoute = route.split("\\")
+    let step = 0;
+    let dirToFind
+    let currDir = root
+
+    if ((route.toLowerCase() === "c:" || route.toLowerCase() === "c:\\")) {
+        currentDir = root
+        return 0
+    }
+
+    while(step !== splittedRoute.length - 1) {
+        dirToFind = splittedRoute[step + 1]
+        currDir = currDir.getChildren().find(x => x.getName() === dirToFind)
+
+        if (currDir === undefined) {
+            return -1
+        }
+
+        step += 1
+    }
+
+    currentDir = currDir
+    return 0
 }
 
 function md(val) {
@@ -152,39 +240,72 @@ function md(val) {
     let route = val.split(" ")[1]
 
     if (route.split("\\")[0].toLowerCase() === "c:") {
-        routes.push(route);
-
-        let splittedRoute = route.split("\\")
-        let name = splittedRoute[splittedRoute.length - 1].split(".")[0]
-        let type = splittedRoute[splittedRoute.length - 1].split(".")[1]
-        if (type === undefined) {
-            type = "directory"
-        }
-        let parent = files.find(p => p.name === splittedRoute[splittedRoute.length - 2])
-        if (parent === undefined) {
-            createParent(splittedRoute[splittedRoute.length - 2], splittedRoute[splittedRoute.length - 3], route, 3)
-            parent = files.find(p => p.name === splittedRoute[splittedRoute.length - 1])
-        }
-
-        files.push(new FileSystemObject(name, type, parent));
-
-        console.log(routes)
+        createDirByFullPath(route)
+    } else {
+        createDirByRelativePath(route)
     }
+
+
+    document.getElementById("currentDir").innerText = currentDir.getFullRoute() + ">"
 }
 
-function createParent(name, parent, route, scope) {
-    let splittedRoute = route.split()
+function createDirByFullPath(route) {
+    let splittedRoute = route.split("\\")
+    let step = 0;
+    let dirToFind
+    let currDir = root
 
-    let pr = files.find(p => p.name === parent)
-    if (pr === undefined) {
-        createParent(splittedRoute[splittedRoute.length - scope], splittedRoute[splittedRoute.length - scope - 1], route, scope - 1)
+    if ((route.toLowerCase() === "c:" || route.toLowerCase() === "c:\\")) {
+        return 0
     }
-    files.push(name, "directory", pr)
+
+    while(step !== splittedRoute.length - 1) {
+        dirToFind = splittedRoute[step + 1]
+
+        if (currDir.getChildren().find(x => x.getName() === dirToFind) !== undefined) {
+            console.log("ll")
+            currDir = currDir.getChildren().find(x => x.getName() === dirToFind)
+        } else {
+            currDir.addChild(new mkdir(dirToFind, "directory", {}, [], currDir))
+            step -= 1
+        }
+
+        step += 1
+    }
+
+    return 0
+}
+
+function createDirByRelativePath(route) {
+    let splittedRoute = route.split("\\")
+    let step = 0;
+    let dirToFind
+    let currDir = currentDir
+
+    if ((route.toLowerCase() === "c:" || route.toLowerCase() === "c:\\")) {
+        return 0
+    }
+
+    while(step !== splittedRoute.length) {
+        dirToFind = splittedRoute[step]
+
+        if (currDir.getChildren().find(x => x.getName() === dirToFind) !== undefined) {
+            console.log("ll")
+            currDir = currDir.getChildren().find(x => x.getName() === dirToFind)
+        } else {
+            currDir.addChild(new mkdir(dirToFind, "directory", {}, [], currDir))
+            step -= 1
+        }
+
+        step += 1
+    }
+
+    return 0
 }
 
 function invalidCommand(val) {
     let pastCommands = document.getElementById("editableBox");
-    let commandLine = document.createElement("span");
+    let commandLine = document.createElement("span")
     commandLine.className = "command-line";
     commandLine.innerText = "'" + val + "'" + " is not recognized as an internal command";
     pastCommands.insertAdjacentElement("beforeend", commandLine);
@@ -211,13 +332,13 @@ function help(commands) {
 
 function cls(val) {
     let pastCommands = document.getElementById("editableBox");
-    while (pastCommands.firstChild) {
+    while(pastCommands.firstChild){
         pastCommands.removeChild(pastCommands.firstChild);
     }
 }
 
 function color(val) {
-    var colors = {
+    let colors = {
         "0": "rgb(12, 12, 12)",
         "1": "rgb(0, 55, 218)",
         "2": "rgb(19, 161, 14)",
@@ -238,7 +359,7 @@ function color(val) {
     };
 
     // Я думаю, тут код можно упростить, но мне лень.
-    var root = document.querySelector(':root');
+    let root = document.querySelector(':root');
     if (val.split(' ').length === 1) {
         root.style.setProperty("--background-color", colors["0"]);
         root.style.setProperty("--text-color", "white");
@@ -263,8 +384,7 @@ function color(val) {
 }
 
 function title(val) {
-    if (val.split(' ').length == 2) {
+    if (val.split(' ').length === 2) {
         document.title = val.split(' ')[1];
     }
 }
-
