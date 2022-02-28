@@ -240,54 +240,27 @@ function md(val) {
     let route = val.split(" ").slice(1).join(" ")
 
     if (route.split("\\")[0].toLowerCase() === "c:") {
-        createDirByFullPath(route)
+        createDir(route, 1)
     } else {
-        createDirByRelativePath(route)
+        createDir(route, 0)
     }
 
 
     document.getElementById("currentDir").innerText = currentDir.getFullRoute() + ">"
 }
 
-function createDirByFullPath(route) {
+function createDir(route, pathInd) {
     let splittedRoute = route.split("\\")
     let step = 0;
     let dirToFind
-    let currDir = root
+    let currDir = pathInd === 1 ? root : currentDir;
 
     if ((route.toLowerCase() === "c:" || route.toLowerCase() === "c:\\")) {
         return 0
     }
 
-    while(step !== splittedRoute.length - 1) {
-        dirToFind = splittedRoute[step + 1]
-
-        if (currDir.getChildren().find(x => x.getName() === dirToFind) !== undefined) {
-            console.log("ll")
-            currDir = currDir.getChildren().find(x => x.getName() === dirToFind)
-        } else {
-            currDir.addChild(new mkdir(dirToFind, "directory", {}, [], currDir))
-            step -= 1
-        }
-
-        step += 1
-    }
-
-    return 0
-}
-
-function createDirByRelativePath(route) {
-    let splittedRoute = route.split("\\")
-    let step = 0;
-    let dirToFind
-    let currDir = currentDir
-
-    if ((route.toLowerCase() === "c:" || route.toLowerCase() === "c:\\")) {
-        return 0
-    }
-
-    while(step !== splittedRoute.length) {
-        dirToFind = splittedRoute[step]
+    while(step !== splittedRoute.length - pathInd) {
+        dirToFind = splittedRoute[step + pathInd]
 
         if (currDir.getChildren().find(x => x.getName() === dirToFind) !== undefined) {
             console.log("ll")
