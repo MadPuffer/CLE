@@ -78,6 +78,10 @@ class mkfile {
     getParent() {
         return this.parent
     }
+
+    addMeta(prop, arg) {
+        this.meta[prop] = arg
+    }
 }
 
 // global vars
@@ -193,7 +197,7 @@ function cd(val) {
     }
 
     document.getElementById("currentDir").innerText = currentDir.getFullRoute() + ">"
-    
+
 }
 
 function findDirByRelativePath(route) {
@@ -265,23 +269,24 @@ function md(val) {
         if (route.split(".")[1] !== undefined) {
             route = route.split("\\").slice(0, route.split("\\").length - 1).join("\\")
             createdElement = createFileByFullPath(route, name, type)
-            return 0
+            // return 0
+        } else {
+            createdElement = createDirByFullPath(route)
         }
-        createdElement = createDirByFullPath(route)
     } else {
 
         if (route.split(".")[1] !== undefined) {
             route = route.split("\\").slice(0, route.split("\\").length - 1).join("\\")
             createdElement = createFileByRelativePath(route, name, type)
-            return 0
+            // return 0
+        } else {
+            createdElement = createDirByRelativePath(route)
         }
-        createdElement = createDirByRelativePath(route)
     }
 
     // ДОДЕЛАТЬ
     createdElement.addMeta("createDate", new Date().toLocaleDateString())
-    createdElement.addMeta("createTime", new Date().getTime().toLocaleString())
-
+    createdElement.addMeta("createTime", new Date().toLocaleTimeString())
     console.log(root)
 
     document.getElementById("currentDir").innerText = currentDir.getFullRoute() + ">"
@@ -334,6 +339,10 @@ function createDirByRelativePath(route) {
     let step = 0;
     let dirToFind
     let currDir = currentDir
+
+    if (splittedRoute[0] === "") {
+        return currentDir
+    }
 
     if ((route.toLowerCase() === "c:" || route.toLowerCase() === "c:\\")) {
         return 0
