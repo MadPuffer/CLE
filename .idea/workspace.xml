@@ -1,5 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:CLE" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="15b0287d-5de4-41ba-83d6-9a665c8e3f80" name="Default Changelist" comment="new commands">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
@@ -58,7 +76,8 @@
       <workItem from="1645897040777" duration="2092000" />
       <workItem from="1645912472637" duration="3077000" />
       <workItem from="1646061836592" duration="10317000" />
-      <workItem from="1646170819365" duration="1244000" />
+      <workItem from="1646170819365" duration="3756000" />
+      <workItem from="1646232032645" duration="2601000" />
     </task>
     <task id="LOCAL-00001" summary="new commands">
       <created>1645838221044</created>
@@ -74,32 +93,56 @@
       <option name="project" value="LOCAL" />
       <updated>1645838732128</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="fileSystem bug fixed">
+      <created>1646172210539</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1646172210539</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="new commands" />
-    <option name="LAST_COMMIT_MESSAGE" value="new commands" />
+    <MESSAGE value="fileSystem bug fixed" />
+    <option name="LAST_COMMIT_MESSAGE" value="fileSystem bug fixed" />
   </component>
   <component name="WindowStateProjectService">
     <state x="461" y="185" key="SettingsEditor" timestamp="1645836342986">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="461" y="185" key="SettingsEditor/0.0.1920.1080@0.0.1920.1080" timestamp="1645836342986" />
-    <state x="552" y="273" key="Vcs.Push.Dialog.v2" timestamp="1645838740794">
+    <state x="552" y="273" key="Vcs.Push.Dialog.v2" timestamp="1646172218730">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state x="552" y="273" key="Vcs.Push.Dialog.v2/0.0.1920.1080@0.0.1920.1080" timestamp="1645838740794" />
+    <state x="552" y="273" key="Vcs.Push.Dialog.v2/0.0.1920.1080@0.0.1920.1080" timestamp="1646172218730" />
+    <state x="777" y="454" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1646173735613">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state x="777" y="454" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1920.1080@0.0.1920.1080" timestamp="1646173735613" />
     <state x="761" y="446" key="git4idea.remote.GitConfigureRemotesDialog" timestamp="1645838152815">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="761" y="446" key="git4idea.remote.GitConfigureRemotesDialog/0.0.1920.1080@0.0.1920.1080" timestamp="1645838152815" />
-    <state x="623" y="235" width="672" height="678" key="search.everywhere.popup" timestamp="1646087602491">
+    <state x="623" y="235" width="672" height="678" key="search.everywhere.popup" timestamp="1646232662230">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state x="623" y="235" width="672" height="678" key="search.everywhere.popup/0.0.1920.1080@0.0.1920.1080" timestamp="1646087602491" />
+    <state x="623" y="235" width="672" height="678" key="search.everywhere.popup/0.0.1920.1080@0.0.1920.1080" timestamp="1646232662230" />
   </component>
 </project>

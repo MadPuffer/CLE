@@ -132,12 +132,20 @@ $(document).ready(function () {
 // }
 
 $("#input-box").keyup(function (event) {
+    playClickSound()
     if (event.keyCode === 13) {
         event.preventDefault();
         enterCommand(document.getElementById("input-box"));
 
     }
 });
+
+function playClickSound() {
+    var audio = new Audio();
+    audio.preload = 'auto';
+    audio.src = 'media\\key' + Math.floor(Math.random() * 4) + '.mp3';
+    audio.play();
+}
 
 function enterCommand(inputArea) {
     let val = inputArea.value;
@@ -398,7 +406,7 @@ function color(val) {
     let colors = {
         "0": "rgb(12, 12, 12)",
         "1": "rgb(0, 55, 218)",
-        "2": "rgb(19, 161, 14)",
+        "2": "#14fdce",
         "3": "rgb(58, 150, 221)",
         "4": "rgb(197, 15, 31)",
         "5": "rgb(136, 23, 152)",
